@@ -1,3 +1,5 @@
+Multiplication of prime numbers in table format :
+
 Objective:   
    
 Program that prints out a multiplication table of the first 10 prime numbers.   
