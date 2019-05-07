@@ -11,22 +11,8 @@ function __autoload( $class )
     }
 }
 
-$opt = 10;
-$primes_only = false;
-if (!empty($argv) && count($argv) > 1) {
-    $opt = $argv[1];
-    $primes_only = isset($argv[2]) && strtolower($argv[2]) == "notable";
-}
-
-$start = microtime(true);
-if (!$primes_only) {
-    $primeMultiplication = new PM($opt);
-    $primeMultiplication->preview();
-} else {
-    $primeMultiplication = new PM($opt);
-    $primeMultiplication->skip_primes();
-}
- 
-
+$opt = 10; // This represents first 10 prime numbers multiplication table
+$primeMultiplication = new PM($opt);
+$primeMultiplication->preview();
 
 ?>
