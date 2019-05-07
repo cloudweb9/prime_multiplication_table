@@ -17,20 +17,6 @@ class PrimeMultiplication extends Prime
     }
 
 
-    public function get_value($i, $j)
-    {
-        if ($j < $i) {
-            return $this->get_value($j, $i);
-        } else {
-            if ($i == 0) {
-                return $j == 0 ? null : $this->primes[$j - 1];
-            } else {
-                return $this->primes[$i - 1] * $this->primes[$j - 1];
-            }
-        }
-    }
-
-
     public function preview()
     {
         /* Add some padding for readability */
@@ -53,14 +39,18 @@ class PrimeMultiplication extends Prime
         $this->lines($padding);
     }
 
-    public function skip_primes()
+    public function get_value($i, $j)
     {
-        foreach($this->primes as $prime) {
-            print(sprintf("%s\t", $prime));
+        if ($j < $i) {
+            return $this->get_value($j, $i);
+        } else {
+            if ($i == 0) {
+                return $j == 0 ? null : $this->primes[$j - 1];
+            } else {
+                return $this->primes[$i - 1] * $this->primes[$j - 1];
+            }
         }
-        print("\n");
     }
-
 
     private function lines($padding)
     {
@@ -71,14 +61,4 @@ class PrimeMultiplication extends Prime
         print("\n");
     }
 
-    public function __get($key)
-    {
-        $allow = [
-            'primes',
-            'length'
-        ];
-        if (isset($this->{$key}) && in_array($key, $allow)) {
-            return $this->{$key};
-        }
-    }
 }
