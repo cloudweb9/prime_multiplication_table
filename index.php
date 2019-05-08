@@ -1,6 +1,7 @@
 <?php 
 
 use Prime\PrimeMultiplication as PM;
+use Test\TestCases as Test;
 
 function __autoload( $class ) 
 {
@@ -11,8 +12,25 @@ function __autoload( $class )
     }
 }
 
-$opt = 10; // This represents first 10 prime numbers multiplication table
-$primeMultiplication = new PM($opt);
-$primeMultiplication->preview();
+$opt = "testcases"; // $opt = 10;
+
+if (is_numeric($opt)) {    
+    $primeMultiplication = new PM($opt);
+    $primeMultiplication->preview();    
+} else if (strtolower($opt) == "testcases") {
+    $test = new Test();
+    // ReflectionClass class reports information about a class.
+    $reflector = new ReflectionClass(get_class($test)); 
+    $functions =  $reflector->getMethods();
+
+    foreach($functions as $v) {
+        if ($v->class === get_class($test) && strpos($v->name, "test_") === 0) {
+            $test->{$v->name}();
+        }
+    }
+    $test->print_results();
+} else {
+    print("checking...");
+} 
 
 ?>
